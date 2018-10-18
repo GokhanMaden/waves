@@ -8,7 +8,10 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.DATABASE, { useNewUrlParser: true });
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.connect(process.env.DATABASE);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -69,7 +72,8 @@ app.post('/api/users/login', (req, res) => {
   })
 })
 
-const port = process.env.PORT || 3002;
+//Müsait olan portlarda koştur.
+const port = process.env.PORT || 3005;
 
 app.listen(port, () => {
   console.log(`Server running on Port ${port}`)
