@@ -89,6 +89,7 @@ app.get('/api/product/woods', (req, res) => {
 //By Arrival
 // /articles?sortBy=createdAt&order=desc&limit=4
 
+
 //By Sell
 // /article?sortBy=sold&order=desc&limit=4&skip=5
 app.get('/api/product/articles', (req, res) => {
