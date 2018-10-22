@@ -85,6 +85,32 @@ app.get('/api/product/woods', (req, res) => {
 })
 
 //Product
+
+//By Arrival
+// /articles?sortBy=createdAt&order=desc&limit=4
+
+
+//By Sell
+// /article?sortBy=sold&order=desc&limit=4&skip=5
+app.get('/api/product/articles', (req, res) => {
+  let order = req.query.order ? req.query.order : 'asc';
+  let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
+  let limit = req.query.limit ? parseInt(req.query.limit) : 100;
+
+  Product.find()
+  .populate('brand')
+  .populate('wood')
+  .sort([[sortBy, order]])
+  .limit(limit)
+  .exec((err, article) => {
+    if(err) {
+      return res.status(400).send(err);
+    }
+
+    res.status(200).send(article)
+  })
+
+})
 app.get('/api/product/article/article_by_id',(req, res) => {
   //URL'den gelen type parametresini alıyoruz. bunu almamızı sağlayan şey
   // bodyPArser'ın urlencoded kısmı.
