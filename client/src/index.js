@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './Resources/css/styles.css';
 
 import { BrowserRouter} from 'react-router-dom';
-import Routes from './App';
+import Routes from './Routes';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
