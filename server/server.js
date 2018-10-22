@@ -85,6 +85,28 @@ app.get('/api/product/woods', (req, res) => {
 })
 
 //Product
+app.get('/api/product/article/article_by_id',(req, res) => {
+  //URL'den gelen type parametresini alıyoruz. bunu almamızı sağlayan şey
+  // bodyPArser'ın urlencoded kısmı.
+  let type = req.query.type;
+  let items = req.query.id;
+
+  if(type === "array") {
+    let ids =req.query.id.split(',');
+    items = [];
+    items = ids.map((item) => {
+      return mongoose.Types.ObjectId(item)
+    })
+  }
+
+  Product.find({'_id': {$in: items}})
+  .populate('brand')
+  .populate('wood')
+  .exec((err, docs) => {
+    return res.status(200).send(docs)
+  })
+})
+
 app.post('/api/product/article',auth, admin, (req, res) => {
   const product = new Product(req.body);
 
