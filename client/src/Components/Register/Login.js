@@ -18,8 +18,7 @@ class Login extends Component {
           placeholder: 'Enter your email'
         },
         validation:{
-          required: true,
-          email: true
+          required: true
         },
         valid: false,
         touch: false,
@@ -72,3 +71,4 @@ class Login extends Component {
 }
 
 export default connect()(Login);
+//13.00
