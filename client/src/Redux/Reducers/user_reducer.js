@@ -1,4 +1,4 @@
-import { LOGIN_USER, REGISTER_USER } from '../Actions/Types';
+import { LOGIN_USER, REGISTER_USER, AUTH_USER } from '../Actions/Types';
 
 export default function(state={}, action) {
   switch(action.type) {
@@ -6,6 +6,8 @@ export default function(state={}, action) {
       return {...state, register: action.payload}
     case LOGIN_USER:
       return {...state, loginSuccess: action.payload}
+    case AUTH_USER:
+      return {...state, userData: action.payload}
     default:
       return state;
   }

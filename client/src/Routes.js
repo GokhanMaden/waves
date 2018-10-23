@@ -3,6 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 import './setupProxy';
 
 import Layout from './hoc/Layout';
+import Auth from './hoc/auth';
+
 import Home from './Components/Home';
 import RegisterLogin from './Components/Register';
 import Register from './Components/Register/Register';
@@ -12,10 +14,10 @@ const Routes = () => {
   return(
     <Layout>
       <Switch>
-        <Route path="/user/dashboard" exact component={UserDashboard} />
-        <Route path="/register" exact component={Register} />
-        <Route path="/register_login" exact component={RegisterLogin} />
-        <Route path="/" exact component={Home} />
+        <Route path="/user/dashboard" exact component={Auth(UserDashboard,true)} />
+        <Route path="/register" exact component={Auth(Register, false)} />
+        <Route path="/register_login" exact component={Auth(RegisterLogin, false)} />
+        <Route path="/" exact component={Auth(Home, null)} />
       </Switch>
     </Layout>
   )
