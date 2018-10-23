@@ -1,6 +1,54 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
+import { connect } from 'react-redux';
 
 class Header extends Component {
+
+  state = {
+    page: [
+      {
+        name: 'Home',
+        linkTo: '/',
+        public: true
+      },
+      {
+        name: 'Guitars',
+        linkTo: '/shop',
+        public: true
+      }
+    ],
+    user: [
+      {
+        name: 'My Cart',
+        linkTo: '/user/cart',
+        public: false
+      },
+      {
+        name: 'My Account',
+        linkTo: '/user/dashboard',
+        public: false
+      },
+      {
+        name: 'Log in',
+        linkTo: '/register_login',
+        public: true
+      },
+      {
+        name: 'Log out',
+        linkTo: '/user/logout',
+        public: false
+      },
+    ]
+  }
+
+  showLinks = (type) => {
+    let list = [];
+
+    if(this.props.user.userData) {
+      
+    }
+  }
   render() {
     return (
       <header className="bck_b_light">
@@ -12,10 +60,10 @@ class Header extends Component {
           </div>
           <div className="right">
             <div className="top">
-              Links
+              {this.showLinks(this.state.page)}
             </div>
             <div className="bottom">
-              Links
+              {this.showLinks(this.state.page)}
             </div>
           </div>
         </div>
@@ -24,4 +72,10 @@ class Header extends Component {
   }
 }
 
-export default Header;
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(Header);
