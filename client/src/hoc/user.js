@@ -21,7 +21,7 @@ const UserLayout = (props) => {
 
   const generateLinks = (links) => (
     links.map((item, index) => (
-      <Link to={item.linkTo} ket={index}>
+      <Link to={item.linkTo} key={index}>
         {item.name}
       </Link>
     ))
