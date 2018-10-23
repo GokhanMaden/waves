@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import FormField from '../Utils/Form/FormField';
+import { update, generateData, isFormValid } from '../Utils/Form/FormActions';
+import { loginUser } from '../../Redux/Actions/user_actions';
 
 class Login extends Component {
 
@@ -18,7 +21,8 @@ class Login extends Component {
           placeholder: 'Enter your email'
         },
         validation:{
-          required: true
+          required: true,
+          email: true
         },
         valid: false,
         touch: false,
@@ -43,14 +47,41 @@ class Login extends Component {
   }
 
   submitForm = (event) => {
+    event.preventDefault();
 
+    let dataToSubmit = generateData(this.state.formdata, 'login');
+    let formIsValid = isFormValid(this.state.formdata, 'login');
+
+    if(formIsValid) {
+      this.props.dispatch(loginUser(dataToSubmit)).then(response => {
+        if(response.payload.loginSuccess) {
+          this.props.history.push('/user/dashboard')
+        } else {
+          this.setState({
+            formError: true
+          })
+        }
+      })
+    } else {
+      this.setState({
+        formError: true
+      })
+    }
   };
   
-  updateForm = () => {
-
+  updateForm = (element) => {
+    const newFormdata = update(element, this.state.formdata, 'login');
+    this.setState({
+      formError: false,
+      formdata: newFormdata
+    })
   }
 
   render() {
+    const error = this.state.formError ? 
+      <div className="error_label">
+        Please check your data.
+      </div> : null;
     return (
       <div className="sign_wrapper">
         <form onSubmit={(event) => this.submitForm(event)}>
@@ -64,11 +95,14 @@ class Login extends Component {
             formdata={this.state.formdata.password}
             change={(element) => this.updateForm(element)}
           />
+
+          {error}
+
+          <button onClick={(event) => this.submitForm(event)}>LOG IN</button>
         </form>
       </div>
     )
   }
 }
 
-export default connect()(Login);
-//13.00
+export default connect()(withRouter(Login));
