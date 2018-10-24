@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import HomeSlider from './HomeSlider';
+import HomePromotion from './HomePromotion';
 
 class Home extends Component {
   render() {
     return (
       <div>
-        Hello from Home!
+        <HomeSlider />
+        <HomePromotion />
       </div>
     );
   }
