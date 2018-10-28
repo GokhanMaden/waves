@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Button from '../Utils/Button';
+
 class Card extends Component {
 
   renderCardImage(images) {
@@ -26,7 +28,31 @@ class Card extends Component {
           </div>
         </div>
         {grid}
-        <div></div>
+        <div className="actions">
+          <div className="button_wrapp">
+            <Button 
+              type="default"
+              altClass="card_link"
+              title="View Product"
+              linkTo={`/product_detail/${props._id}`}
+              addStyle={{
+                margin: "10px 0 0 0"
+              }}
+            />
+          </div>
+          <div className="button_wrapp">
+            <Button 
+              type="bag_link"
+              runAction={() => console.log("rucAcrtion")}
+              altClass="card_link"
+              title="View Product"
+              linkTo={`/product_detail/${props._id}`}
+              addStyle={{
+                margin: "10px 0 0 0"
+              }}
+            />
+          </div>
+        </div>
       </div>
     );
   }
