@@ -14,7 +14,7 @@ class CollapseRadio extends Component {
 
   state = {
     open: false,
-    value: 0
+    value: '0'
   }
 
   componentDidMount () {
@@ -43,6 +43,25 @@ class CollapseRadio extends Component {
         className="icon"
       />
   )
+
+  handleChange = (event) => {
+    this.props.handleFilters(event.target.value);
+    this.setState({
+      value: event.target.value
+    })
+  }
+
+  renderList = () => (
+    this.props.list ? this.props.list.map((value) => (
+
+      <FormControlLabel 
+        key={value._id}
+        value={`${value._id}`}
+        control={<Radio/>}
+        label={value.name}
+      />
+    )) : null
+  );
   
   render() {
     return (
@@ -61,6 +80,15 @@ class CollapseRadio extends Component {
               primary={this.props.title}
               className="collapse_title"
             />
+            <RadioGroup
+              aria-label="prices"
+              name="prices"
+              onClick={this.handleChange}
+              value={this.state.value}
+            >
+              {this.renderList()}
+
+            </RadioGroup>
             </List>
           </Collapse>
         </List>
