@@ -48,7 +48,7 @@ app.post('/api/product/brand', auth, admin, (req, res) => {
   })
 })
 
-app.get('/api/product/brand', (req, res) => {
+app.get('/api/product/brands', (req, res) => {
   Brand.find({}, (err, brands) => {
     if(err) {
       return res.status(400).send(err);
@@ -98,7 +98,7 @@ app.get('/api/product/articles', (req, res) => {
   let limit = req.query.limit ? parseInt(req.query.limit) : 100;
 
   Product.find()
-  .populate('brands')
+  .populate('brand')
   .populate('wood')
   .sort([[sortBy, order]])
   .limit(limit)
@@ -111,7 +111,9 @@ app.get('/api/product/articles', (req, res) => {
   })
 
 })
-app.get('/api/product/article/article_by_id',(req, res) => {
+
+//{{url}}/api/product/article_by_id?id=5b2d38217d75e2cdcb31cf05&type=single
+app.get('/api/product/article_by_id',(req, res) => {
   //URL'den gelen type parametresini alıyoruz. bunu almamızı sağlayan şey
   // bodyPArser'ın urlencoded kısmı.
   let type = req.query.type;
@@ -166,27 +168,31 @@ app.post('/api/product/shop', (req, res) => {
   let order = req.body.order ? req.body.order : "desc";
   let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
   let limit = req.body.limit ? req.body.limit : 100;
-  let skip = req.body.skip;
+  let skip = parseInt(req.body.skip);
   let findArgs = {};
 
   for(let key in req.body.filters) {
     if(req.body.filters[key].length > 0) {
       if(key === 'price') {
+
+        console.log("=price",req.body.filters[key])
         findArgs[key] = {
           $gte: req.body.filters[key][0],
           $lte: req.body.filters[key][1]
         }
-        console.log("bu fiyat içinden dönen",findArgs)
       } else {
+        console.log("=!price",req.body.filters[key])
         findArgs[key] = req.body.filters[key]
-        console.log("bu sadece brand verdiğimizde dönen",findArgs);
       }
     }
   }
 
-  Product.find(findArgs)
-    .populate('brands')
-    .populate('woods')
+  console.log(findArgs);
+
+  Product
+    .find()
+    .populate('brand')
+    .populate('wood')
     .sort([[sortBy, order]])
     .skip(skip)
     .limit(limit)
