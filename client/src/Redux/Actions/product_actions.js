@@ -30,7 +30,7 @@ export function getProductsByArrival () {
 }
 
 export function getBrands () {
-  const request = axios.get(`${PRODUCT_SERVER}/brand`)
+  const request = axios.get(`${PRODUCT_SERVER}/brands`)
     .then(response => response.data)
 
     return {
@@ -57,11 +57,8 @@ export function getProductsToShop (skip, limit, filters = [], previousState=[]) 
     filters
   }
 
-  console.log("data",data)
-
   const request = axios.post(`${PRODUCT_SERVER}/shop`, data)
     .then(response => {
-      console.log("response",response);
       return {
         size: response.data.size,
         articles: response.data.articles
