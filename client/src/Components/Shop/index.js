@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import PageTop from '../Utils/PageTop';
+
+import { frets,price } from '../Utils/Form/FixedCategories';
+
 import { connect } from 'react-redux';
 import { getProductsToShop ,getBrands, getWoods } from '../../Redux/Actions/product_actions';
 import CollapseCheckbox from '../Utils/CollapseCheckbox'
 import CollapseRadio from '../Utils/CollapseRadio';
-import { frets, price } from '../Utils/Form/FixedCategories';
 
 class Shop extends Component {
 
@@ -13,9 +15,9 @@ class Shop extends Component {
     limit: 6,
     skip: 0,
     filters: {
-      brands: [],
+      brand: [],
       frets: [],
-      woods: [],
+      wood: [],
       price: []
     }
   }
@@ -23,59 +25,56 @@ class Shop extends Component {
   componentDidMount () {
     this.props.dispatch(getBrands());
     this.props.dispatch(getWoods());
+
     this.props.dispatch(getProductsToShop(
       this.state.skip,
       this.state.limit,
       this.state.filters
-    ));
+    ))
   }
 
   handleFilters = (filters, category) => {
     const newFilters = {...this.state.filters};
     newFilters[category] = filters;
-
-    if(category === 'price') {
+    
+    if(category === "price") {
       let priceValues = this.handlePrice(filters);
       newFilters[category] = priceValues;
     }
-
+    
     this.showFilteredResults(newFilters);
-
     this.setState({
       filters: newFilters
     })
   }
-
+  
   showFilteredResults = (filters) => {
 
     this.props.dispatch(getProductsToShop(
       0,
       this.state.limit,
       filters
-    )).then(() => {
-      this.setState({
-        skip: 0
+      )).then(() => {
+        this.setState({
+          skip: 0
+        })
       })
-    })
-  }
-
-  handlePrice = (value) => {
-    const data = price;
-    let array = [];
-
-    for(let key in data) {
-      if(data[key]._id === parseInt(value,10)) {
-        array = data[key].array;
-      }
     }
-
-    return array;
-  }
+    
+    handlePrice = (value) => {
+      const data = price;
+      let array = [];
+  
+      for(let key in data) {
+        if(data[key]._id === parseInt(value,10)) {
+            array = data[key].array;
+        }
+      }
+      return array;
+    }
   render() {
 
     const products = this.props.products;
-    console.log(this.state);
-
     return (
       <div>
         <PageTop 
@@ -84,45 +83,45 @@ class Shop extends Component {
         <div className="container">
           <div className="shop_wrapper">
             <div className="left">
-              <CollapseCheckbox 
-                initState={true}
-                title="Brands"
-                list={products.brands}
-                handleFilters={(filters) => this.handleFilters(filters, 'brands')}
+              <CollapseCheckbox
+                  initState={true}
+                  title="Brands"
+                  list={products.brands}
+                  handleFilters={(filters)=> this.handleFilters(filters,'brand')}
               />
-              <CollapseCheckbox 
-                initState={false}
-                title="Frets"
-                list={frets}
-                handleFilters={(filters) => this.handleFilters(filters, 'frets')}
+                <CollapseCheckbox
+                  initState={false}
+                  title="Frets"
+                  list={frets}
+                  handleFilters={(filters)=> this.handleFilters(filters,'frets')}
               />
-              <CollapseCheckbox 
-                initState={false}
-                title="Woods"
-                list={products.woods}
-                handleFilters={(filters) => this.handleFilters(filters, 'woods')}
+              <CollapseCheckbox
+                  initState={false}
+                  title="Wood"
+                  list={products.woods}
+                  handleFilters={(filters)=> this.handleFilters(filters,'wood')}
               />
-              <CollapseRadio 
-                initState={true}
-                title="Price"
-                list={price}
-                handleFilters={(filters) => this.handleFilters(filters, 'price')}
+                <CollapseRadio
+                  initState={true}
+                  title="Price"
+                  list={price}
+                  handleFilters={(filters)=> this.handleFilters(filters,'price')}
               />
             </div>
-            <div className="right">
-right
-            </div>
+          <div className="right">
+          </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-const mapStateFromProps = (state) => {
-  return {
-    products: state.products
-  }
+
+const mapStateToProps = (state) => {
+    return {
+        products: state.products
+    }
 }
 
-export default connect(mapStateFromProps)(Shop);
+export default connect(mapStateToProps)(Shop);

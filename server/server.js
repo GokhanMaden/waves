@@ -190,7 +190,7 @@ app.post('/api/product/shop', (req, res) => {
   console.log(findArgs);
 
   Product
-    .find()
+    .find(findArgs)
     .populate('brand')
     .populate('wood')
     .sort([[sortBy, order]])
