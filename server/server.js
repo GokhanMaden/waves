@@ -98,7 +98,7 @@ app.get('/api/product/articles', (req, res) => {
   let limit = req.query.limit ? parseInt(req.query.limit) : 100;
 
   Product.find()
-  .populate('brand')
+  .populate('brands')
   .populate('wood')
   .sort([[sortBy, order]])
   .limit(limit)
@@ -159,6 +159,55 @@ app.get('/api/product/articles', (req, res) => {
 
     res.status(200).send(articles)
   })
+})
+
+app.post('/api/product/shop', (req, res) => {
+
+  let order = req.body.order ? req.body.order : "desc";
+  let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
+  let limit = req.body.limit ? req.body.limit : 100;
+  let skip = req.body.skip;
+  let findArgs = {};
+
+  for(let key in req.body.filters) {
+    if(req.body.filters[key].length > 0) {
+      if(key === 'price') {
+        findArgs[key] = {
+          $gte: req.body.filters[key][0],
+          $lte: req.body.filters[key][1]
+        }
+        console.log("bu fiyat içinden dönen",findArgs)
+      } else {
+        findArgs[key] = req.body.filters[key]
+        console.log("bu sadece brand verdiğimizde dönen",findArgs);
+      }
+    }
+  }
+
+  Product.find(findArgs)
+    .populate('brands')
+    .populate('woods')
+    .sort([[sortBy, order]])
+    .skip(skip)
+    .limit(limit)
+    .exec((err, articles) => {
+      if(err) {
+        return res.status(400).send(err);
+      }
+
+      // console.log("articles.data",articles)
+      
+      res.status(200).json({
+        size: articles.length,
+        articles
+      })
+    })
+
+    //exec bize serverdan bişeyler dönecek.
+    //gte ve lte => greater than and equal to & 
+    //less than and equal to anlamında ve görevinde kullanıldı.
+    //Product modelini kullanarak tüm parametrelerimizi geçtik.
+
 })
 
 //Users
