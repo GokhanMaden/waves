@@ -175,19 +175,15 @@ app.post('/api/product/shop', (req, res) => {
     if(req.body.filters[key].length > 0) {
       if(key === 'price') {
 
-        console.log("=price",req.body.filters[key])
         findArgs[key] = {
           $gte: req.body.filters[key][0],
           $lte: req.body.filters[key][1]
         }
       } else {
-        console.log("=!price",req.body.filters[key])
         findArgs[key] = req.body.filters[key]
       }
     }
   }
-
-  console.log(findArgs);
 
   Product
     .find(findArgs)
@@ -200,8 +196,6 @@ app.post('/api/product/shop', (req, res) => {
       if(err) {
         return res.status(400).send(err);
       }
-
-      // console.log("articles.data",articles)
       
       res.status(200).json({
         size: articles.length,
