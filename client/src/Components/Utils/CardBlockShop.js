@@ -3,7 +3,7 @@ import Card from '../Utils/Card';
 
 const CardBlockShop = (props) => {
 
-  const renderCards = (list) => (
+  const renderCards = () => (
 
     props.list ? props.list.map(card => (
       <Card
