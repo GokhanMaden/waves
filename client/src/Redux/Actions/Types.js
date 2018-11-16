@@ -10,3 +10,4 @@ export const GET_BRANDS = 'get_products';
 export const GET_WOODS = 'get_woods';
 
 export const GET_PRODUCTS_TO_SHOP = "getProductsToShop";
+export const ADD_PRODUCT = "addProduct";
