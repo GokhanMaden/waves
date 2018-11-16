@@ -14,7 +14,7 @@ class Card extends Component {
   render() {
 
     const props = this.props;
-    let grid = props.grid ? <div className="description">sdfasdfasd</div>: null;
+    let grid = props.grid ? <div className="description">{props.description}</div>: null;
     return (
       <div className={`card_item_wrapper ${props.grid}`}>
         <div className="image" style={{
@@ -26,31 +26,32 @@ class Card extends Component {
             <div className="name">{props.name}</div>
             <div className="brand">${props.price}</div>
           </div>
-        </div>
-        {grid}
-        <div className="actions">
-          <div className="button_wrapp">
-            <Button 
-              type="default"
-              altClass="card_link"
-              title="View Product"
-              linkTo={`/product_detail/${props._id}`}
-              addStyle={{
-                margin: "10px 0 0 0"
-              }}
-            />
-          </div>
-          <div className="button_wrapp">
-            <Button 
-              type="bag_link"
-              runAction={() => console.log("rucAcrtion")}
-              altClass="card_link"
-              title="View Product"
-              linkTo={`/product_detail/${props._id}`}
-              addStyle={{
-                margin: "10px 0 0 0"
-              }}
-            />
+        
+          {grid}
+          <div className="actions">
+            <div className="button_wrapp">
+              <Button 
+                type="default"
+                altClass="card_link"
+                title="View Product"
+                linkTo={`/product_detail/${props._id}`}
+                addStyle={{
+                  margin: "10px 0 0 0"
+                }}
+              />
+            </div>
+            <div className="button_wrapp">
+              <Button 
+                type="bag_link"
+                runAction={() => console.log("rucAcrtion")}
+                altClass="card_link"
+                title="View Product"
+                linkTo={`/product_detail/${props._id}`}
+                addStyle={{
+                  margin: "10px 0 0 0"
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
