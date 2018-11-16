@@ -3,7 +3,8 @@ import {
   GET_PRODUCTS_BY_SELL, 
   GET_BRANDS, 
   GET_WOODS, 
-  GET_PRODUCTS_TO_SHOP } from '../Actions/Types';
+  GET_PRODUCTS_TO_SHOP,
+  ADD_PRODUCT } from '../Actions/Types';
 
 export default function(state={}, action) {
   switch(action.type) {
@@ -17,6 +18,8 @@ export default function(state={}, action) {
       return {...state, woods: action.payload}
     case GET_PRODUCTS_TO_SHOP:
       return {...state, toShop: action.payload.articles, toShopSize: action.payload.size}
+    case ADD_PRODUCT:
+      return {...state, addProduct: action.payload}
     default:
       return state;
   }
