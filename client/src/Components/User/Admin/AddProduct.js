@@ -5,9 +5,17 @@ import FormField from '../../Utils/Form/FormField';
 import { update, generateData, isFormValid, populateOptionFields, resetFields } from '../../Utils/Form/FormActions';
 
 import { connect } from 'react-redux';
-import { getBrands, getWoods, addProduct } from '../../../Redux/Actions/product_actions';
+import { getBrands, getWoods, addProduct, clearProduct } from '../../../Redux/Actions/product_actions';
 
 class AddProduct extends Component {
+
+  //select component'i yaparken eğer key ve value'ları yanlış atarsak eğer böyle bir hata alıryor ve success false dönüyor. Select component yaratırken key ve value'ları doğru kurgulamak gerekli.
+  // "Product validation failed: 
+  // brand: Cast to ObjectID failed for value "Ibanez" at path "brand", 
+  // shipping: Cast to Boolean failed for value "No" at path "shipping", 
+  // available: Cast to Boolean failed for value "Yes" at path "available", 
+  // wood: Cast to ObjectID failed for value "Mahogany" at path "wood", 
+  // publish: Cast to Boolean failed for value "Public" at path "publish""
 
   state = {
     formError: false,
@@ -218,8 +226,10 @@ class AddProduct extends Component {
     setTimeout(() => {
       this.setState({
         formSuccess: false
-      }, 3000)
-    })
+      },() => {
+        this.props.dispatch(clearProduct())
+      })
+    }, 3000)
   }
 
   submitForm = (event) => {
@@ -258,7 +268,7 @@ class AddProduct extends Component {
         Please check your fields.
       </div> : null;
 
-    const success = this.state.success ? 
+    const success = this.state.formSuccess ? 
       <div className="form_success">
         Product added.
       </div> : null;
