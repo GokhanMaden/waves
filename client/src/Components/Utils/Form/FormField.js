@@ -54,7 +54,7 @@ const FormField = ({formdata, change, id}) => {
       break;
       case('select'):
         formTemplate = (
-          <div className="form_block">
+          <div className="formblock">
 
             { formdata.showlabel ? 
               <div className="label_inputs">{formdata.config.label}</div>: null
@@ -67,7 +67,10 @@ const FormField = ({formdata, change, id}) => {
               <option value="">Please select</option>
               {
                 formdata.config.options.map((item) => (
-                  <option key={item.key} value={item.value}>{item.value}</option>
+                  <option 
+                    key={item.key} 
+                    value={item.key}
+                  >{item.value}</option>
                 ))
               }
             </select>
