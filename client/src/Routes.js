@@ -11,11 +11,13 @@ import Register from './Components/Register/Register';
 import UserDashboard from './Components/User';
 import Shop from './Components/Shop';
 import AddProduct from './Components/User/Admin/AddProduct';
+import ManageCategories from './Components/User/Admin/ManageCategories';
 
 const Routes = () => {
   return(
     <Layout>
       <Switch>
+        <Route path="/admin/manage_categories" exact component={Auth(ManageCategories,true)} />
         <Route path="/admin/add_product" exact component={Auth(AddProduct,true)} />
         <Route path="/user/dashboard" exact component={Auth(UserDashboard,true)} />
         
