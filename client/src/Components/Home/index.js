@@ -4,7 +4,7 @@ import HomePromotion from './HomePromotion';
 import CardBlock from '../Utils/CardBlock';
 
 import { connect } from 'react-redux';
-import { getProductsByArrival, getProductsBySell} from '../../Redux/Actions/product_actions'
+import { getProductsByArrival, getProductsBySell} from '../../store/Actions/product_actions'
 
 class Home extends Component {
 

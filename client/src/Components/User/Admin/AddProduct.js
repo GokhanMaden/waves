@@ -6,7 +6,7 @@ import { update, generateData, isFormValid, populateOptionFields, resetFields } 
 import FileUpload from '../../Utils/Form/FileUpload';
 
 import { connect } from 'react-redux';
-import { getBrands, getWoods, addProduct, clearProduct } from '../../../Redux/Actions/product_actions';
+import { getBrands, getWoods, addProduct, clearProduct } from '../../../store/Actions/product_actions';
 
 class AddProduct extends Component {
 

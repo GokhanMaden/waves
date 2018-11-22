@@ -4,7 +4,7 @@ import PageTop from '../Utils/PageTop';
 import { frets,price } from '../Utils/Form/FixedCategories';
 
 import { connect } from 'react-redux';
-import { getProductsToShop ,getBrands, getWoods } from '../../Redux/Actions/product_actions';
+import { getProductsToShop ,getBrands, getWoods } from '../../store/Actions/product_actions';
 import CollapseCheckbox from '../Utils/CollapseCheckbox'
 import CollapseRadio from '../Utils/CollapseRadio';
 

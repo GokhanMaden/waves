@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import FormField from '../Utils/Form/FormField';
 import { update, generateData, isFormValid } from '../Utils/Form/FormActions';
-import { loginUser } from '../../Redux/Actions/user_actions';
+import { loginUser } from '../../store/Actions/user_actions';
 
 class Login extends Component {
 
