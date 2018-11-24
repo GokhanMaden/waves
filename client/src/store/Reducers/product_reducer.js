@@ -7,7 +7,9 @@ import {
   ADD_PRODUCT,
   CLEAR_PRODUCT, 
   ADD_BRAND,
-  ADD_WOOD} from '../Actions/Types';
+  ADD_WOOD,
+  CLEAR_PRODUCT_DETAIL,
+  GET_PRODUCT_DETAIL} from '../Actions/Types';
 
 export default function(state={}, action) {
   switch(action.type) {
@@ -35,6 +37,10 @@ export default function(state={}, action) {
       return {...state, addProduct: action.payload}
     case CLEAR_PRODUCT:
       return {...state, addProduct: action.payload}
+    case GET_PRODUCT_DETAIL:
+      return {...state, prodDetail: action.payload}
+    case CLEAR_PRODUCT_DETAIL:
+      return {...state, prodDetail: action.payload}
     default:
       return state;
   }
