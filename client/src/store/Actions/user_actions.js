@@ -1,6 +1,11 @@
 import axios from 'axios';
 import { USER_SERVER } from '../../Components/Utils/Misc';
-import { LOGIN_USER, REGISTER_USER, AUTH_USER, LOGOUT_USER } from './Types';
+import { 
+  LOGIN_USER, 
+  REGISTER_USER, 
+  AUTH_USER, 
+  LOGOUT_USER,
+  ADD_TO_CART_USER } from './Types';
 
 export function registerUser(dataToSubmit) {
   const request = axios.post(`${USER_SERVER}/register`, dataToSubmit)
@@ -40,5 +45,13 @@ export function logoutUser() {
     return {
       type: LOGOUT_USER,
       payload: request
+    }
+}
+
+export function addToCart(_id) {
+
+    return {
+      type: ADD_TO_CART_USER,
+      payload: ''
     }
 }

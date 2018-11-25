@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-
 import Button from '../Utils/Button';
+import { connect } from 'react-redux';
+//related to product but its depends on user!
+import { addToCart } from '../../store/Actions/user_actions';
 
 class Card extends Component {
 
@@ -43,12 +45,8 @@ class Card extends Component {
             <div className="button_wrapp">
               <Button 
                 type="bag_link"
-                runAction={() => console.log("rucAcrtion")}
-                altClass="card_link"
-                title="View Product"
-                linkTo={`/product_detail/${props._id}`}
-                addStyle={{
-                  margin: "10px 0 0 0"
+                runAction={() => {
+                  props.user.userData.isAuth ? this.props.dispatch(addToCart(props._id)) : console.log('You need to login');
                 }}
               />
             </div>
@@ -59,4 +57,13 @@ class Card extends Component {
   }
 }
 
-export default Card;
+//Aslında burada çağırmamıza gerek yok fakat user'ın
+//authenticated olup olmadığını öğrenmemiz lazım.
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(Card);

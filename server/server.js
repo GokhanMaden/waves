@@ -320,13 +320,25 @@ app.get(`/api/users/removeimage`,auth, admin, (req, res) => {
     if(error) {
       return res.json({success: false, error})
     }
-
     return res.status(200).send({
       success: true
     })
-    
   })
+})
 
+app.post(`/api/users/addToCart`, auth, (req,res) => {
+
+  //user id'sini (request'in içinden) alıyoruz.
+  User.findOne({_id: req.user._id}, (err, doc)=> {
+    //Usercart array'ina duplicate element girmek istemiyoruz.
+    let duplicate = false;
+
+    //auth'un içinden user bilgilerini aldık, 
+    //böylece user'ın içindeki tüm document'lara forEach ile ulaşacağız.
+    //user modelin içinde cart diye bir array oluşturmuştuk.
+    
+    doc.cart.forEach()
+  })
 })
 
 //Müsait olan portlarda koştur.
