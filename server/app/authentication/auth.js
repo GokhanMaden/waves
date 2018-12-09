@@ -20,6 +20,7 @@ let auth = (req, res, next) => {
       })
     }
 
+    //user'ı ve taşıdığı token'ı dönüyoruz.
     req.token = token;
     req.user = user;
 

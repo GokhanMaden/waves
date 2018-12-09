@@ -16,3 +16,5 @@ export const ADD_PRODUCT = "addProduct";
 export const CLEAR_PRODUCT = "clearProduct";
 export const GET_PRODUCT_DETAIL = "get_product_detail";
 export const CLEAR_PRODUCT_DETAIL = "clear_product_detail";
+
+export const ADD_TO_CART_USER = "add_to_cart_user";
