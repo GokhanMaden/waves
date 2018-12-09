@@ -28,9 +28,7 @@ export default function(ComposedClass, reload, adminRoute = null) {
               this.props.history.push('/user/dashboard')
             }
           }
-
         }
-
         this.setState({
           loading: false
         })

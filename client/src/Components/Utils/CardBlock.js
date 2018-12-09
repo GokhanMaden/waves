@@ -4,12 +4,13 @@ import Card from './Card';
 const CardBlock = (props) => {
 
   const renderCards = () => (
-    props.list ? props.list.map((card, index) => (
-      <Card 
-        key={index}
-        {...card}
-      />
-    )) : null
+    // props.list ? props.list.map((card, index) => (
+    //   <Card 
+    //     key={index}
+    //     {...card}
+    //   />
+    // )) : null
+    <p>cansu</p>
   )
 
   let title = props.title ? 

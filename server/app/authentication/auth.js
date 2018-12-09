@@ -1,5 +1,5 @@
 //Auth burada bize middleware olacaktır.
-const { User } = require('../models/user');
+const { User } = require('../user/user');
 
 let auth = (req, res, next) => {
 
